@@ -20,7 +20,7 @@ class Api:
             self.params = {}
 
         response_text = self.service.request(method=self.method, route=self.route, params=self.params, body=self.body)
-        if self.model:
+        if self.model and response_text.status_code == 200:
             response = self.model.model_validate_json(response_text)
         else:
             response = response_text

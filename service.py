@@ -22,7 +22,7 @@ class Service:
         try:
             response = session.send(request, timeout=10.0)
             logger.info(f"Response:{response.status_code} {response.text}")
-
+            return response
         except ConnectTimeout as e:
             logger.info(f"Response:{url} {e}")
             pytest.fail("Timeout error")

@@ -1,11 +1,6 @@
 import requests
 import pytest
-import logging
-from pydantic import ValidationError
-from models.art_object import ArtObject
 
-logging.basicConfig(level=logging.INFO)
-BASE_URL = "https://collectionapi.metmuseum.org/public/collection/v1"
 
 def test_search():
     query = "Van Gogh"
