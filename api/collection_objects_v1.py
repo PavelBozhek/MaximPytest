@@ -6,11 +6,12 @@ from service import Service
 
 
 class CollectionObjectsV1(Api):
-    def __init__(self, service: Service, params: dict[str, Any] | None = None):
+    def __init__(self, service: Service, code: int, params: dict[str, Any] | None = None):
         super().__init__(
             service=service,
-            route="public/collection/v1/objects",
+            route="/objects",
             method="GET",
             model=CollectionObjects,
-            params=params
+            params=params,
+            code=code,
         )

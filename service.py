@@ -11,7 +11,7 @@ class Service:
     def __init__(self, url: str):
         self.url = url
 
-    def request(self, method: str, route: str, params: dict[str, Any], body: dict[str, Any] | None = None):
+    def request(self, method: str, route: str, code: int, params: dict[str, Any], body: dict[str, Any] | None = None):
         url = f"{self.url}/{route}"
         request = Request(method, url, params=params, json=body).prepare()
 
@@ -21,8 +21,9 @@ class Service:
         session = Session()
         try:
             response = session.send(request, timeout=10.0)
+            assert response.status_code == code
             logger.info(f"Response:{response.status_code} {response.text}")
-            return response
+            return str(response.text)
         except ConnectTimeout as e:
             logger.info(f"Response:{url} {e}")
             pytest.fail("Timeout error")
